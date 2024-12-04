@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Всегда добовлять новые стартапы
-    'library_blog',
+    'library_blod',
 ]
 
 MIDDLEWARE = [
