@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from . import models
 
-def book_detail_view(request,id):
+def book_detail_view(request, id):
     if request.method == "GET":
         book_id = get_object_or_404(models.BookModel, id=id)
         context = {

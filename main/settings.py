@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Всегда добовлять новые стартапы
     'library_blod',
+    'age_catherine',
 ]
 
 MIDDLEWARE = [
