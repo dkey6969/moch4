@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class AgeCatherineConfig(AppConfig):
+class TagsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'age_catherine'
+    name = 'tags'

@@ -6,11 +6,11 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
-
 class Book(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    tags = models.ManyToManyField(Tag)
+    name = models.CharField(max_length=100,)
+    tags = models.ManyToManyField(Tag, related_name='books')
 
     def __str__(self):
-        return self.title
+        return self.name
+
+
