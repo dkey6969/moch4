@@ -1,9 +1,9 @@
-from msilib.schema import ListView
 from django.shortcuts import render
 from .models import Tag, Book
 from django.views import generic
 
-class OlderListView(generic,ListView):
+
+class OlderListView(generic.ListView):
     template_name = 'tags/older.html'
     context_object_name = 'older'
     model = Book
@@ -12,32 +12,32 @@ class OlderListView(generic,ListView):
         return Book.objects.filter(tags__name='книги для стариков')
 
 
-class KidListView(generic,ListView):
-    template_name = 'tags/kid.html'
-    context_object_name = 'kid'
+class KidsListView(generic.ListView):
+    template_name = 'tags/kids.html'
+    context_object_name = 'kids'
     model = Book
 
     def get_queryset(self):
         return Book.objects.filter(tags__name='книги для детей')
 
 
-class TeenegersListView(generic,ListView):
+class TeenegersListView(generic.ListView):
     template_name = 'tags/teenegers.html'
-    context_object_name = 'kid'
+    context_object_name = 'teenegers'
     model = Book
 
     def get_queryset(self):
         return Book.objects.filter(tags__name='книги для подростков')
 
-class YouthListView(generic,ListView):
-    template_name = 'tags/youth.html'
-    context_object_name = 'kid'
+class YouthsListView(generic.ListView):
+    template_name = 'tags/youths.html'
+    context_object_name = 'youths'
     model = Book
 
     def get_queryset(self):
         return Book.objects.filter(tags__name='книги для молодежи')
 
-class AllListView(generic,ListView):
+class AllListView(generic.ListView):
     template_name = 'tags/all.html'
     context_object_name = 'alls'
     model = Book
