@@ -1,6 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
+from django.views.generic import CreateView
 from . import models
+from .forms import CommentForm
+from django.views import generic
+
+from .models import BookModel
+
 
 def book_detail_view(request, id):
     if request.method == "GET":
@@ -29,3 +35,24 @@ def about_pets(request):
 def system_time(request):
     if request.method == 'GET':
         return HttpResponse('19;51')
+
+
+class BookDetailView(generic.DetailView):
+    template_name = 'main_page/book_detail.html'
+    model = BookModel
+    context_object_name = 'book'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = CommentForm()
+        return context
+
+    def __post__(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.book = self.object
+            comment.save()
+            return redirect('book_detail', pk=self.object.pk)
+        return self.get(request, *args, **kwargs)

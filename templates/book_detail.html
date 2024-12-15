@@ -22,12 +22,19 @@
     <!-- Блок для комментариев -->
     <div class="comment-section">
         <h5>Комментарии</h5>
-        {% for i in book_id.reviews.all %}
+        {% for i in book_id.reviews.comments.all %}
         <div class="comment">
             <p> {{ i.created_at }}:{{ i.text_review }} <strong>Оценка:</strong>{{ i.stars }}</p>
         </div>
         {%endfor%}
-     
+
+        <h5>Добавить комментарий</h5>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </form>
+
     </div>
 </div>
 {% include 'components/footer.html' %}

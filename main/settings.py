@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     # Всегда добовлять новые стартапы
     'library_blod',
     'tags',
+    'Basket'
 ]
 
 MIDDLEWARE = [
