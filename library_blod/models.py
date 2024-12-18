@@ -48,11 +48,3 @@ class Review(models.Model):
     def __str__(self):
         return f'{self.book}:{self.stars}'
 
-class Comments(models.Model):
-    text = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    book = models.ForeignKey(BookModel, on_delete=models.CASCADE,
-                             related_name='comments')
-
-    def __str__(self):
-        return self.text

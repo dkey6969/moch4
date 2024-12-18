@@ -2,8 +2,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.basket_list, name='basket_list'),
-    path('form/', views.basket_form, name='basket_create'),
-    path('form/<int:pk>/', views.basket_form, name='basket_edit'),
-    path('delete/<int:pk>/', views.basket_delete, name='basket_delete'),
+    path('basket_list/', views.basket_list_view, name='basket_list'),
+    path('basket_list/<int:id>/', views.basket_detail_view, name='basket_detail'),
+    path('create_basket/', views.create_basket_view, name='create_basket'),
+    path('basket_list/<int:id>/update/', views.update_basket_view, name='update_basket'),
+    path('basket_list/<int:id>/delete/', views.delete_basket_view, name='delete_basket'),
+
 ]

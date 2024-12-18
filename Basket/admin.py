@@ -1,6 +1,4 @@
 from django.contrib import admin
-from .models import Basket
+from Basket.models import BasketModel
 
-@admin.register(Basket)
-class BasketAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'phone_number', 'book')
+admin.site.register(BasketModel)

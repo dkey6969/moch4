@@ -1,25 +1,12 @@
-{% include "components/header.html" %}
-<h1>Список заказов</h1>
-<a href="{% url 'basket_create' %}">Добавить заказ</a>
-<table border="1">
-    <tr>
-        <th>Имя</th>
-        <th>Email</th>
-        <th>Телефон</th>
-        <th>Книга</th>
-        <th>Действия</th>
-    </tr>
-    {% for basket in baskets %}
-    <tr>
-        <td>{{ basket.name }}</td>
-        <td>{{ basket.email }}</td>
-        <td>{{ basket.phone_number }}</td>
-        <td>{{ basket.book.title }}</td>
-        <td>
-            <a href="{% url 'basket_edit' basket.pk %}">Редактировать</a>
-            <a href="{% url 'basket_delete' basket.pk %}">Удалить</a>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
-{% include "components/footer.html" %}
+<ol>
+    {% for i in basket_list %}
+    <li>
+        <h1>{{ i.name }}</h1>
+        <p>{{ i.email}}</p>
+        <p>{{ i.phone_number }}</p>
+        <a href="/basket_list/{{i.id}}/">подробнее</a>
+        <a href="/basket_list/{{i.id}}/update/">изменить</a>
+        <a href="/basket_list/{{i.id}}/delete/">Удалить</a>
+    </li>
+    {%endfor%}
+</ol>

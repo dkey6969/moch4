@@ -1,45 +1,58 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Basket
-from library_blod.models import BookModel
+from django.shortcuts import render, redirect, get_object_or_404
+from Basket.forms import BasketForm
+from Basket.models import BasketModel
 
 
-
-def basket_list(request):
-    baskets = Basket.objects.all()
-    return render(request, 'basket/basket_list.html', {'baskets': baskets})
-
-
-
-def basket_form(request, pk=None):
-    basket = None
-    if pk:
-        basket = get_object_or_404(Basket, pk=pk)
-    books = BookModel.objects.all()
-
+def create_basket_view(request):
     if request.method == 'POST':
-        name = request.POST['name']
-        email = request.POST['email']
-        phone_number = request.POST['phone_number']
-        book = get_object_or_404(BookModel, pk=request.POST['book'])
+        form = BasketForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('basket_list')
 
-        if basket:
-            basket.name = name
-            basket.email = email
-            basket.phone_number = phone_number
-            basket.book = book
-            basket.save()
-        else:
-            Basket.objects.create(name=name, email=email, phone_number=phone_number, book=book)
-
-        return redirect('basket_list')
-
-    return render(request, 'basket/basket_form.html', {'basket': basket, 'books': books})
+    else:
+        form = BasketForm()
+    return render(request, 'basket/create_basket.html', {'form': form})
 
 
+def basket_list_view(request):
+    if request.method == 'GET':
+        basket_list = BasketModel.objects.all().order_by('-id')
+        context = {
+            'basket_list': basket_list
+        }
+        return render(request, 'basket/basket_list.html', context=context)
 
-def basket_delete(request, pk):
-    basket = get_object_or_404(Basket, pk=pk)
+
+def basket_detail_view(request, id):
+    if request.method == 'GET':
+        basket_id = get_object_or_404(BasketModel, id=id)
+        context = {
+            'basket_id': basket_id
+        }
+        return render(request,
+                      'basket/basket_detail.html',
+                      context=context
+                      )
+
+def update_basket_view(request, id):
+    basket_id = get_object_or_404(BasketModel, id=id)
     if request.method == 'POST':
-        basket.delete()
-        return redirect('basket_list')
-    return render(request, 'basket/basket_confirm_delete.html', {'basket': basket})
+        form = BasketForm(request.POST, instance=basket_id)
+        if form.is_valid():
+            form.save()
+            return redirect('basket_list')
+    else:
+        form = BasketForm(instance=basket_id)
+    return render(request,
+                 'basket/basket_update.html',
+                 {
+                      'basket_id': basket_id,
+                      'form': form,
+                  }
+                  )
+
+def delete_basket_view(request, id):
+    basket_id = get_object_or_404(BasketModel, id=id)
+    basket_id.delete()
+    return redirect('basket_list')
