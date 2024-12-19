@@ -1,12 +1,16 @@
-<ol>
-    {% for i in basket_list %}
-    <li>
-        <h1>{{ i.name }}</h1>
-        <p>{{ i.email}}</p>
-        <p>{{ i.phone_number }}</p>
-        <a href="/basket_list/{{i.id}}/">подробнее</a>
-        <a href="/basket_list/{{i.id}}/update/">изменить</a>
-        <a href="/basket_list/{{i.id}}/delete/">Удалить</a>
+{% load static %}
+{% include 'components/header.html' %}
+<link rel="stylesheet" href="{% static 'basket/basket_list.css' %}">
+<ul class="todo-list">
+    {% for i in todo_list %}
+    <li class="todo-item">
+        <h1 class="basket-name">{{ i.name }}</h1>
+        <p class="basket-choice">{{ i.choice_check }}</p>
+        <div class="todo-actions">
+            <a href="/basket_list/{{i.id}}/" class="basket-link">Подробнее</a>
+            <a href="/basket_list/{{i.id}}/update/" class="basket-link update">Изменить</a>
+            <a href="/basket_list/{{i.id}}/delete/" class="basket-link delete">Удалить</a>
+        </div>
     </li>
-    {%endfor%}
-</ol>
+    {% endfor %}
+</ul>

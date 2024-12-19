@@ -3,25 +3,41 @@ from django.http import HttpResponse
 from django.views.generic import CreateView
 from . import models
 from django.views import generic
-
 from .models import BookModel
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 
 
-def book_detail_view(request, id):
-    if request.method == "GET":
-        book_id = get_object_or_404(models.BookModel, id=id)
-        context = {
-            'book_id': book_id,
-        }
-        return render(request, 'book_detail.html', context=context)
+class SearchView(generic.ListView):
+    template_name = 'book.html'
+    context_object_name = 'book_list'
+    paginate_by = 5
 
-def book_list_view(request):
-    if request.method == 'GET':
-        book_list = models.BookModel.objects.all().order_by('-id')
-        context = {
-            'book_list': book_list,
-        }
-        return render(request,template_name='book.html', context=context)
+    def get_queryset(self):
+        return models.BookModel.objects.filter(title__icontains=self.request.GET.get('q'))
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['q'] = self.request.GET.get('q')
+        return context
+
+
+class BookDetailView(DetailView):
+    model = models.BookModel
+    template_name = 'book_detail.html'
+    context_object_name = 'book_id'
+
+    def get_object(self):
+        return get_object_or_404(self.model, id=self.kwargs.get('id'))
+
+
+class BookListView(ListView):
+    model = models.BookModel
+    template_name = 'book.html'
+    context_object_name = 'book_list'
+
+    def get_queryset(self):
+        return self.model.objects.all().order_by('-id')
 
 def about_me(request):
     if request.method == 'GET':

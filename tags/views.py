@@ -13,8 +13,8 @@ class OlderListView(generic.ListView):
 
 
 class KidsListView(generic.ListView):
-    template_name = 'tags/kids.html'
-    context_object_name = 'kids'
+    template_name = 'tags/kid.html'
+    context_object_name = 'kid'
     model = Book
 
     def get_queryset(self):
@@ -30,8 +30,8 @@ class TeenegersListView(generic.ListView):
         return Book.objects.filter(tags__name='книги для подростков')
 
 class YouthsListView(generic.ListView):
-    template_name = 'tags/youths.html'
-    context_object_name = 'youths'
+    template_name = 'tags/youth.html'
+    context_object_name = 'youth'
     model = Book
 
     def get_queryset(self):
@@ -39,7 +39,7 @@ class YouthsListView(generic.ListView):
 
 class AllListView(generic.ListView):
     template_name = 'tags/all.html'
-    context_object_name = 'alls'
+    context_object_name = 'all'
     model = Book
 
     def get_queryset(self):

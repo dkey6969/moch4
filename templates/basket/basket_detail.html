@@ -1,4 +1,14 @@
-<h1>{{ basket_id.name }}</h1>
-<p>{{ basket_id.email }}</p>
-<p>{{ basket_id.phone_number }}</p>
-<a href="{%url 'basket_list'%}">На спиоск задач</a>
+{% load static %}
+{% include 'components/header.html' %}
+<link rel="stylesheet" href="{% static 'basket/basket_detail.css' %}">
+<div class="todo-details">
+    <h1 class="todo-title">{{ todo_id.title }}</h1>
+    <p class="todo-description">{{ todo_id.description }}</p>
+    <p class="todo-status">
+        <strong>Статус:</strong> {{ todo_id.choice_check }}
+    </p>
+    <p class="todo-author">
+        <strong>Автор фильма:</strong> {{ todo_id.film_by }}
+    </p>
+    <a href="{% url 'basketList' %}" class="back-link">На список задач</a>
+</div>
