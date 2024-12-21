@@ -1,0 +1,11 @@
+<ol>
+    {% for book in books %}
+    <li>
+        <h2>{{ book.title }}</h2>
+        <p>Цена: {{ book.price }}</p>
+        <p>Наличие: {{ book.availability }}</p>
+        <img src="{{ book.image }}" alt="{{ book.title }}" width="200">
+    </li>
+    <hr>
+    {% endfor %}
+</ol>

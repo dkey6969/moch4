@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('library_blod.urls')),
     path('',include('tags.urls')),
     path('',include('Basket.urls')),
+    path('',include('parser_app.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
