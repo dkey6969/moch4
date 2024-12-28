@@ -1,0 +1,6 @@
+<h1>Детальная информация об ингредиенте</h1>
+<p><strong>Название:</strong> {{ ingredient.name }}</p>
+<p><strong>Количество:</strong> {{ ingredient.quantity }} {{ ingredient.unit }}</p>
+<p><strong>Рецепт:</strong> {{ ingredient.recipe.title }}</p>
+
+<a href="{% url 'ingredient_update' ingredient.pk %}">Редактировать ингредиент</a>

@@ -10,6 +10,8 @@ urlpatterns = [
     path('',include('Basket.urls')),
     path('',include('parser_app.urls')),
     path('',include('users.urls')),
+    path('', include('ingredient.urls')),
+    path('',include('Recipe.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

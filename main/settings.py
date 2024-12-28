@@ -19,20 +19,23 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Всегда добовлять новые стартапы
+    # Всегда добавлять новые стартапы
     'library_blod',
     'tags',
     'Basket',
     'parser_app',
-    'users'
-
+    'users',
+    'Recipe',
+    'Ingredient',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

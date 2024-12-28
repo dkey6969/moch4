@@ -1,0 +1,7 @@
+<h1>Список ингредиентов</h1>
+<ul>
+    {% for ingredient in ingredients %}
+        <li><a href="{% url 'ingredient_detail' ingredient.pk %}">{{ ingredient.name }} ({{ ingredient.quantity }} {{ ingredient.unit }})</a></li>
+    {% endfor %}
+</ul>
+<a href="{% url 'ingredient_create' %}">Добавить новый ингредиент</a>
